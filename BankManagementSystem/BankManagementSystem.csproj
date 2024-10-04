@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Databases\AccountMemoryRepo.cs" />
+    <Compile Include="Repos\IAccountRepo.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,6 +85,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Pages\AccountListWindow.xaml.cs">
       <DependentUpon>AccountListWindow.xaml</DependentUpon>
     </Compile>
