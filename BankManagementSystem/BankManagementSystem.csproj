@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Databases\AccountMemoryRepo.cs" />
     <Compile Include="Repos\IAccountRepo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />

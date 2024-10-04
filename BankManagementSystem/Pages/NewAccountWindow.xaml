@@ -17,38 +17,38 @@
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 10 0 0">
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Account Number"/>
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.AccountNumber}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Name"/>
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Name}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Balance" />
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Balance}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Type"/>
-                <RadioButton Content="current" Margin="100 0 0 0"/>
+                <RadioButton Content="current"  Margin="100 0 0 0" />
                 <RadioButton Content="savings"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Email"/>
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Email}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Phone"/>
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.PhoneNumber}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Address"/>
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Address}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
@@ -67,18 +67,19 @@
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Transaction Count"/>
-                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0"/>
+                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0" Text="{Binding NewAccount.TransactionCount}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Last Transaction Date"/>
-                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0"/>
+                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0" Text="{Binding NewAccount.LastTransactionDate}"/>
             </StackPanel>
         </StackPanel>
 
         <Button HorizontalAlignment="right" Grid.Row="2" Width="200" Background="Teal" Content="Save" Foreground="White" FontWeight="bold"
                 Height="50"
-                Margin="0 10 20 20"/>
+                Margin="0 10 20 20"
+                Command="{Binding CreateCommand}"/>
 
     </Grid>
 </Window>
