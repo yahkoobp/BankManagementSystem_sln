@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BankManagementSystem.Pages;
 
 namespace BankManagementSystem
 {
@@ -29,6 +30,8 @@ namespace BankManagementSystem
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             FormConfig.newAccountWindow.Show();
+            NewAccountWindow newAccountWindow = (NewAccountWindow)FormConfig.newAccountWindow;
+            FormConfig.accountViewModel.NewWindowClose = newAccountWindow.WindowClose;
 
         }
 
@@ -48,6 +51,9 @@ namespace BankManagementSystem
                 return;
             }
             FormConfig.editAccountWindow.Show();
+
+            EditAccountWindow editAccountWindow = (EditAccountWindow)FormConfig.editAccountWindow;
+            FormConfig.accountViewModel.EditWindowClose = editAccountWindow.WindowClose;
         }
     }
 }

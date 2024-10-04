@@ -13,10 +13,13 @@ using BankManagementSystem.Repos;
 
 namespace BankManagementSystem.ViewModels
 {
+    public delegate void DWidnowClose();
     public class AccountViewModel : ViewModelBase
     {
 
         private Account _newAccount = null;
+        public DWidnowClose NewWindowClose;
+        public DWidnowClose EditWindowClose;
 
         public Account NewAccount
         {
@@ -106,6 +109,11 @@ namespace BankManagementSystem.ViewModels
                     caption: "Alert",
                     button: MessageBoxButton.OK,
                     icon: MessageBoxImage.Information);
+
+            if (NewWindowClose != null)
+            {
+                NewWindowClose();
+            }
         }
 
         public void Update()
@@ -121,6 +129,11 @@ namespace BankManagementSystem.ViewModels
                     caption: "Alert",
                     button: MessageBoxButton.OK,
                     icon: MessageBoxImage.Information);
+
+            if (EditWindowClose != null)
+            {
+                EditWindowClose();
+            }
         }
     }
 

@@ -30,5 +30,10 @@ namespace BankManagementSystem.Pages
             e.Cancel = true;
             this.Hide();
         }
+
+        public void WindowClose()
+        {
+            this.Hide();
+        }
     }
 }
