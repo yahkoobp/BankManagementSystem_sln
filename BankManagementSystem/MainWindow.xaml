@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BankManagementSystem" xmlns:viewmodels="clr-namespace:BankManagementSystem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AccountViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closed="Window_Closed">
-    <Grid MaxWidth="1000" Margin="10 10 10 10">
+    <Grid MaxWidth="1200" Margin="10 10 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>

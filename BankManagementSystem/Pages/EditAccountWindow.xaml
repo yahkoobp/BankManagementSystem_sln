@@ -16,33 +16,33 @@
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Account Number"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.AccountNumber}"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.AccountNumber}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Name"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Name}"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Name}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Balance" />
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Balance}"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Balance}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Type"/>
                 <RadioButton Content="current" Margin="100 0 0 0" />
-                <RadioButton Content="savings"/>
+                <RadioButton Content="savings" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Email"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Email}"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Email}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Phone"/>
-                <TextBox  Width="300" Margin="100 0 0 0"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Email}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
@@ -52,12 +52,12 @@
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="IsActive"/>
-                <CheckBox Content="" Margin="100 0 0 0" />
+                <CheckBox Content="" Margin="100 0 0 0" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Interest Percentage"/>
-                <ComboBox Margin="100 0 0 0">
+                <ComboBox Margin="100 0 0 0" IsEnabled="false">
                     <ComboBoxItem Content="5%"/>
                     <ComboBoxItem Content="10%"/>
                     <ComboBoxItem Content="15%"/>
