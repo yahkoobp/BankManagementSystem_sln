@@ -22,6 +22,7 @@ namespace BankManagementSystem.Pages
         public EditAccountWindow()
         {
             InitializeComponent();
+            this.DataContext = FormConfig.accountViewModel;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

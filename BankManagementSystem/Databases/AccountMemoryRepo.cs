@@ -47,7 +47,7 @@ namespace BankManagementSystem.Databases
             }
         };
 
-        public void AddAccount(Account account)
+        public void Create(Account account)
         {
             accounts.Add(account);
         }
@@ -66,6 +66,26 @@ namespace BankManagementSystem.Databases
         public ObservableCollection<Account> ReadAllAccount()
         {
             return accounts;
+        }
+
+        public void DeleteAccount(int acNo, Account account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deposit(int acNo, int Amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Withdrw(int acNo, int Amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CalculateInterestAndUpdateBalance()
+        {
+            throw new NotImplementedException();
         }
     }
 }

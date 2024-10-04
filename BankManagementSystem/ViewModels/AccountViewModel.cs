@@ -15,19 +15,8 @@ namespace BankManagementSystem.ViewModels
 {
     public class AccountViewModel : ViewModelBase
     {
-        public Account _account;
 
-        public Account Account
-        {
-            get { return _account; }
-            set 
-            {
-                _account = value; 
-                onPropertyChanged(nameof(Account));
-            }
-        }
-
-        private Account _newAccount;
+        private Account _newAccount = null;
 
         public Account NewAccount
         {
@@ -70,10 +59,10 @@ namespace BankManagementSystem.ViewModels
 
 
             };
-            CreateCommand = new RelayCommand(Add);
+            CreateCommand = new RelayCommand(Create);
         }
 
-        public void Add()
+        public void Create()
         {
             Account newAccount = new Account
             {
@@ -97,8 +86,8 @@ namespace BankManagementSystem.ViewModels
             {
                 return;
             }
-            Accounts.Add(newAccount);
-            this.NewAccount = new Account {AccountNumber = 0, Name = "" , Balance = 0 , Type ="" , Email = "" , PhoneNumber = "",Address ="" , IsActive = false ,InterestPercentage = 0 ,TransactionCount=0 ,LastTransactionDate = DateTime.Now};
+            _repo.Create(newAccount);
+            this.NewAccount = new Account { AccountNumber = 0, Name = "", Balance = 0, Type = "", Email = "", PhoneNumber = "", Address = "", IsActive = false, InterestPercentage = 0, TransactionCount = 0, LastTransactionDate = DateTime.Now };
             //this.NewItenary.Id = 0;
             //..
             //this.NewItenary = NewItenary;
@@ -107,6 +96,8 @@ namespace BankManagementSystem.ViewModels
                     button: MessageBoxButton.OK,
                     icon: MessageBoxImage.Information);
         }
+
+        
 
 
 

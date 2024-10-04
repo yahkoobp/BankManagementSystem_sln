@@ -15,9 +15,10 @@ namespace BankManagementSystem
         public static AccountViewModel accountViewModel = null;
         static FormConfig()
         {
+            accountViewModel = new AccountViewModel();
             newAccountWindow = new NewAccountWindow();
             editAccountWindow = new EditAccountWindow();
-            accountViewModel = new AccountViewModel();
+            
         }
 
     }

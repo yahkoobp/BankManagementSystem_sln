@@ -10,9 +10,13 @@ namespace BankManagementSystem.Repos
 {
     public interface IAccountRepo
     {
-        void AddAccount(Account account);
+        void Create(Account account);
         void UpdateAccount(int acNo , Account account);
 
+        void DeleteAccount(int acNo , Account account);
+        void Deposit(int acNo , int Amount);
+        void Withdrw(int acNo , int Amount);
+        void CalculateInterestAndUpdateBalance();
         ObservableCollection<Account> ReadAllAccount();
 
     }
