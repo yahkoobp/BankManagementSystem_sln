@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BankManagementSystem.Pages;
+using BankManagementSystem.ViewModels;
 
 namespace BankManagementSystem
 {
@@ -11,10 +12,12 @@ namespace BankManagementSystem
     {
         public static NewAccountWindow newAccountWindow = null;
         public static EditAccountWindow editAccountWindow = null;
+        public static AccountViewModel accountViewModel = null;
         static FormConfig()
         {
             newAccountWindow = new NewAccountWindow();
             editAccountWindow = new EditAccountWindow();
+            accountViewModel = new AccountViewModel();
         }
 
     }

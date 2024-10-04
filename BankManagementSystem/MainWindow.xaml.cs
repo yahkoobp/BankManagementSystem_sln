@@ -23,6 +23,7 @@ namespace BankManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = FormConfig.accountViewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

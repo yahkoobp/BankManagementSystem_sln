@@ -23,19 +23,19 @@
                 Click="Button_Click"/>
         <DataGrid Grid.Row="2" Margin="0 10 0 0"
                    SelectedItem="" IsReadOnly="True" AreRowDetailsFrozen="True" AutoGenerateColumns="False"
-                  SelectionMode="Single">
+                  SelectionMode="Single" ItemsSource="{Binding Accounts}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Account Number"/>
-                <DataGridTextColumn Header="Name" />
-                <DataGridTextColumn Header="Balance"/>
-                <DataGridTextColumn Header="Type"/>
-                <DataGridTextColumn Header="Email"/>
-                <DataGridTextColumn Header="Phone Number"/>
-                <DataGridTextColumn Header="Address"/>
-                <DataGridTextColumn Header="IsActive"/>
-                <DataGridTextColumn Header="Interest Percentage"/>
-                <DataGridTextColumn Header="Transaction Count"/>
-                <DataGridTextColumn Header="Last Transaction Date"/>
+                <DataGridTextColumn Header="Account Number" Binding="{Binding AccountNumber}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Balance" Binding="{Binding Balance}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive}"/>
+                <DataGridTextColumn Header="Interest Percentage" Binding="{Binding InterestPercentage}"/>
+                <DataGridTextColumn Header="Transaction Count" Binding="{Binding TransactionCount}"/>
+                <DataGridTextColumn Header="Last Transaction Date" Binding="{Binding LastTransactionDate}"/>
 
 
             </DataGrid.Columns>
