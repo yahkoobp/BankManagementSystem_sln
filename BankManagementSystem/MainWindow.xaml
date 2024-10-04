@@ -42,7 +42,8 @@
         </DataGrid>
         <Button Grid.Row="3" Content="Update Account" Width="200" Height="30"
                 Margin="0 10 0 0" HorizontalAlignment="Right"
-                Background="#9e0344" Foreground="yellow" FontWeight="bold"/>
+                Background="#9e0344" Foreground="yellow" FontWeight="bold"
+                Click="Button_Click_1"/>
 
 
     </Grid>

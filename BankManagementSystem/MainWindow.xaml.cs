@@ -35,5 +35,10 @@ namespace BankManagementSystem
         {
             Application.Current.Shutdown();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            FormConfig.editAccountWindow.Show();
+        }
     }
 }
