@@ -12,7 +12,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" TextAlignment="center" Text="New Account"/>
+        <TextBlock Grid.Row="0" TextAlignment="center" Text="New Account"
+                   FontSize="22" FontWeight="Bold"/>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Account Number"/>
