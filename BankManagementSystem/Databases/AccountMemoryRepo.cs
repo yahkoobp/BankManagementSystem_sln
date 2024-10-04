@@ -52,13 +52,13 @@ namespace BankManagementSystem.Databases
             accounts.Add(account);
         }
 
-        public void UpdateAccount(int acNo , Account account)
+        public void UpdateAccount(Account account)
         {
              foreach(var ac in accounts)
             {
-                if (ac.AccountNumber == acNo)
+                if (ac.AccountNumber == account.AccountNumber)
                 {
-
+                    ac.Address = account.Address;
                 }
             }
         }

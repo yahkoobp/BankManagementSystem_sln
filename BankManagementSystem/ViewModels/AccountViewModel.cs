@@ -28,6 +28,16 @@ namespace BankManagementSystem.ViewModels
             }
         }
 
+        private Account _selectedAccount = null;
+        public Account SelectedAccount
+        {
+            get => _selectedAccount;
+            set { 
+                _selectedAccount = value; 
+                onPropertyChanged(nameof(SelectedAccount)); 
+            }
+        }
+
 
         private IAccountRepo _repo = new AccountMemoryRepo();
         public ObservableCollection<Account> Accounts
@@ -60,6 +70,7 @@ namespace BankManagementSystem.ViewModels
 
             };
             CreateCommand = new RelayCommand(Create);
+            UpdateCommand = new RelayCommand(Update);
         }
 
         public void Create()
@@ -97,9 +108,20 @@ namespace BankManagementSystem.ViewModels
                     icon: MessageBoxImage.Information);
         }
 
-        
+        public void Update()
+        {
+            if (this.SelectedAccount == null)
+            {
+                return;
+            }
 
-
-
+            _repo.UpdateAccount(this.SelectedAccount);
+            this.SelectedAccount = this.SelectedAccount;
+            var result = MessageBox.Show(messageBoxText: "Updated Successfully",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+        }
     }
+
 }

@@ -11,7 +11,7 @@ namespace BankManagementSystem.Repos
     public interface IAccountRepo
     {
         void Create(Account account);
-        void UpdateAccount(int acNo , Account account);
+        void UpdateAccount(Account account);
 
         void DeleteAccount(int acNo , Account account);
         void Deposit(int acNo , int Amount);

@@ -39,6 +39,14 @@ namespace BankManagementSystem
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (grdAccounts.SelectedIndex == -1)
+            {
+                var result = MessageBox.Show(messageBoxText: "Please select iternary to edit",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+                return;
+            }
             FormConfig.editAccountWindow.Show();
         }
     }

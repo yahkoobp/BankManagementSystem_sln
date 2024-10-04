@@ -16,8 +16,9 @@ namespace BankManagementSystem
         static FormConfig()
         {
             accountViewModel = new AccountViewModel();
-            newAccountWindow = new NewAccountWindow();
             editAccountWindow = new EditAccountWindow();
+            newAccountWindow = new NewAccountWindow();
+            
             
         }
 
