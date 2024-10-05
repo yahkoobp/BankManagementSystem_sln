@@ -1,24 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BankManagementSystem.Models
 {
-    public class Account
+    public class Account : INotifyPropertyChanged
     {
+        private decimal _balance;
         public int AccountNumber { get; set; }
         public string Name { get; set; }
-        public Decimal Balance { get; set; }
+        public decimal Balance
+        {
+            get { return _balance; }
+            set
+            {
+                _balance = value;
+                OnPropertyChanged(nameof(Balance));
+            }
+        }
         public string Type { get; set; }
         public String Email { get; set; }
         public String PhoneNumber { get; set; }
-        public String Address { get; set; }
-        public bool IsActive{ get; set; }
-        public int InterestPercentage  { get; set; }
-        public int TransactionCount { get; set; }
-        public DateTime LastTransactionDate { get; set; }
 
+        private string _address;
+
+        public string Address
+        {
+            get { return _address; }
+            set 
+            {
+                _address = value;
+                OnPropertyChanged(nameof(Address));
+            }
+        }
+
+        public bool IsActive{ get; set; }
+        public string InterestPercentage  { get; set; }
+
+        private int _transactionCount;
+
+        public int TransactionCount
+        {
+            get { return _transactionCount; }
+            set 
+            { 
+                _transactionCount = value;
+                OnPropertyChanged(nameof(TransactionCount));
+            }
+        }
+
+        private DateTime _lastTrasnsactionDate;
+
+        public DateTime LastTransactionDate
+        {
+            get { return _lastTrasnsactionDate; }
+            set 
+            {
+                _lastTrasnsactionDate = value;
+                OnPropertyChanged(nameof(LastTransactionDate));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

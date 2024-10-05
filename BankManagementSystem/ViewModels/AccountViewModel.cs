@@ -14,10 +14,12 @@ using BankManagementSystem.Repos;
 namespace BankManagementSystem.ViewModels
 {
     public delegate void DWidnowClose();
+   
     public class AccountViewModel : ViewModelBase
     {
 
         private Account _newAccount = null;
+       
         public DWidnowClose NewWindowClose;
         public DWidnowClose EditWindowClose;
 
@@ -41,8 +43,10 @@ namespace BankManagementSystem.ViewModels
             }
         }
 
+        
 
-        private IAccountRepo _repo = new AccountMemoryRepo();
+
+        private IAccountRepo _repo = AccountMemoryRepo.Instance;
         public ObservableCollection<Account> Accounts
         {
             get
@@ -61,12 +65,12 @@ namespace BankManagementSystem.ViewModels
                 AccountNumber = 00000,
                 Name = "",
                 Balance = 0,
-                Type = "savings",
-                Email = "minnu@gmail.com",
-                PhoneNumber = "5236526526",
-                Address = "gdsagdhsgdhsg",
-                IsActive = true,
-                InterestPercentage = 0,
+                Type = "",
+                Email = "",
+                PhoneNumber = "",
+                Address = "",
+                IsActive = false,
+                InterestPercentage = "0",
                 TransactionCount = 0,
                 LastTransactionDate = DateTime.Now,
 
@@ -74,6 +78,7 @@ namespace BankManagementSystem.ViewModels
             };
             CreateCommand = new RelayCommand(Create);
             UpdateCommand = new RelayCommand(Update);
+           
         }
 
         public void Create()
@@ -101,7 +106,7 @@ namespace BankManagementSystem.ViewModels
                 return;
             }
             _repo.Create(newAccount);
-            this.NewAccount = new Account { AccountNumber = 0, Name = "", Balance = 0, Type = "", Email = "", PhoneNumber = "", Address = "", IsActive = false, InterestPercentage = 0, TransactionCount = 0, LastTransactionDate = DateTime.Now };
+            this.NewAccount = new Account { AccountNumber = 0, Name = "", Balance = 0, Type = "", Email = "", PhoneNumber = "", Address = "", IsActive = false, InterestPercentage = "0", TransactionCount = 0, LastTransactionDate = DateTime.Now };
             //this.NewItenary.Id = 0;
             //..
             //this.NewItenary = NewItenary;
@@ -135,6 +140,9 @@ namespace BankManagementSystem.ViewModels
                 EditWindowClose();
             }
         }
+
+
+        
     }
 
 }

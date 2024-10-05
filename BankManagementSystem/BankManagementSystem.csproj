@@ -57,10 +57,21 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Databases\AccountMemoryRepo.cs" />
+    <Compile Include="Pages\DashBoardWindow.xaml.cs">
+      <DependentUpon>DashBoardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DepositWindow.xaml.cs">
+      <DependentUpon>DepositWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WithdrawWindow.xaml.cs">
+      <DependentUpon>WithdrawWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repos\IAccountRepo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\DepositViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ViewModels\WithdrawViewModel.cs" />
+    <Page Include="Pages\AccountListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -69,11 +80,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FormConfig.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Pages\AccountListWindow.xaml.cs">
+      <DependentUpon>AccountListWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AccountListWindow.xaml">
+    <Page Include="Pages\DashBoardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DepositWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,12 +100,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\WithdrawWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Pages\AccountListWindow.xaml.cs">
-      <DependentUpon>AccountListWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\EditAccountWindow.xaml.cs">
       <DependentUpon>EditAccountWindow.xaml</DependentUpon>
     </Compile>
