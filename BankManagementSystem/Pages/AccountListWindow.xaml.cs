@@ -61,5 +61,19 @@ namespace BankManagementSystem
             e.Cancel = true;
             this.Hide();
         }
+
+        private void btnView_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdAccounts.SelectedIndex == -1)
+            {
+                var result = MessageBox.Show(messageBoxText: "Please select an account",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+                return;
+            }
+            FormConfig.accountViewWindow.Show();
+
+        }
     }
 }

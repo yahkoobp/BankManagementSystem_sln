@@ -18,6 +18,8 @@ namespace BankManagementSystem
         public static DepositWindow depositWindow = null;
         public static AccountListWindow accountListWindow = null;
         public static WithdrawWindow withdrawWindow = null;
+        public static DashBoardWindow dashBoardWindow = null;
+        public static AccountViewWindow accountViewWindow = null;
         
         static FormConfig()
         {
@@ -29,6 +31,8 @@ namespace BankManagementSystem
             depositWindow = new DepositWindow();
             accountListWindow = new AccountListWindow();
             withdrawWindow = new WithdrawWindow();
+            dashBoardWindow = new DashBoardWindow();
+            accountViewWindow = new AccountViewWindow();
 
             
         }
