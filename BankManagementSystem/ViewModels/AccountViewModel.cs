@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using BankManagementSystem.Commands;
 using BankManagementSystem.Databases;
+using BankManagementSystem.Exceptions;
 using BankManagementSystem.Models;
 using BankManagementSystem.Repos;
 
@@ -51,7 +52,16 @@ namespace BankManagementSystem.ViewModels
         {
             get
             {
-                return _repo.ReadAllAccount();
+                try
+                {
+                    return _repo.ReadAllAccount();
+                }
+                catch(AccountException ae)
+                {
+                    Logger.log.Error(ae.Message);
+                    throw;
+                }
+                
             }
         }
 
@@ -105,15 +115,20 @@ namespace BankManagementSystem.ViewModels
             {
                 return;
             }
-            _repo.Create(newAccount);
-            this.NewAccount = new Account { AccountNumber = 0, Name = "", Balance = 0, Type = "", Email = "", PhoneNumber = "", Address = "", IsActive = false, InterestPercentage = "0", TransactionCount = 0, LastTransactionDate = DateTime.Now };
-            //this.NewItenary.Id = 0;
-            //..
-            //this.NewItenary = NewItenary;
-            result = MessageBox.Show(messageBoxText: "Created Successfully",
-                    caption: "Alert",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Information);
+            try
+            {
+                _repo.Create(newAccount);
+                result = MessageBox.Show(messageBoxText: "Created Successfully",
+                   caption: "Alert",
+                   button: MessageBoxButton.OK,
+                   icon: MessageBoxImage.Information);
+                Logger.log.Info($"An account with acoount number {newAccount.AccountNumber} has been created successfully");
+                this.NewAccount = new Account { AccountNumber = 0, Name = "", Balance = 0, Type = "", Email = "", PhoneNumber = "", Address = "", IsActive = false, InterestPercentage = "0", TransactionCount = 0, LastTransactionDate = DateTime.Now };
+            }
+            catch(AccountException ae)
+            {
+                Logger.log.Error(ae.Message);
+            }
 
             if (NewWindowClose != null)
             {
@@ -128,12 +143,21 @@ namespace BankManagementSystem.ViewModels
                 return;
             }
 
-            _repo.UpdateAccount(this.SelectedAccount);
-            this.SelectedAccount = this.SelectedAccount;
-            var result = MessageBox.Show(messageBoxText: "Updated Successfully",
-                    caption: "Alert",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Information);
+            try
+            {
+                _repo.UpdateAccount(this.SelectedAccount);
+                this.SelectedAccount = this.SelectedAccount;
+                var result = MessageBox.Show(messageBoxText: $"Account {SelectedAccount.AccountNumber} is updated successfully",
+                        caption: "Alert",
+                        button: MessageBoxButton.OK,
+                        icon: MessageBoxImage.Information);
+                Logger.log.Info($"Account {SelectedAccount.AccountNumber} is updated successfully");
+            }
+            catch(AccountException ae)
+            {
+                Logger.log.Error(ae.Message);
+            }
+            
 
             if (EditWindowClose != null)
             {

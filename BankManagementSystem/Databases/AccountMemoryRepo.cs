@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BankManagementSystem.Exceptions;
 using BankManagementSystem.Models;
 using BankManagementSystem.Repos;
 
@@ -69,21 +70,57 @@ namespace BankManagementSystem.Databases
 
         public void Create(Account account)
         {
-            accounts.Add(account);
+            try
+            {
+                accounts.Add(account);
+            }
+            catch(AccountException ae)
+            {
+                throw new AccountException("Error in creating account");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void UpdateAccount(Account account)
         {
-            var existingAccount = accounts.FirstOrDefault(a => a.AccountNumber == account.AccountNumber);
-            if (existingAccount != null)
+            try
             {
-                existingAccount.Address = account.Address;
+                var existingAccount = accounts.FirstOrDefault(a => a.AccountNumber == account.AccountNumber);
+                if (existingAccount != null)
+                {
+                    existingAccount.Address = account.Address;
+                }
+                else
+                {
+                    throw new AccountException("Account doesn't exists");
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public ObservableCollection<Account> ReadAllAccount()
         {
-            return accounts;
+            try
+            {
+                return accounts;
+            }
+            catch(AccountException ae)
+            {
+                throw new AccountException("Error reading accounts");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void DeleteAccount(int acNo, Account account)
@@ -93,63 +130,54 @@ namespace BankManagementSystem.Databases
 
         public void Deposit(int acNo, int Amount)
         {
-            var account = accounts.FirstOrDefault(a => a.AccountNumber == acNo);
-            if (account != null)
+            try
             {
-                account.Balance = account.Balance + Amount;
-                account.LastTransactionDate = DateTime.Now;
-                account.TransactionCount = account.TransactionCount + 1;
+                var account = accounts.FirstOrDefault(a => a.AccountNumber == acNo);
+                if (account != null)
+                {
+                    account.Balance = account.Balance + Amount;
+                    account.LastTransactionDate = DateTime.Now;
+                    account.TransactionCount = account.TransactionCount + 1;
 
-                MessageBox.Show(messageBoxText: $"Deposited Successfully to account {acNo}",
-                    caption: "Alert",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Information);
-
+                }
+                else
+                {
+                    throw new AccountException("Account Not Found , Please input valid account number");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show(messageBoxText: $"Account Not Found , Please input valid account number",
-                    caption: "Warning",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Warning);
-                return;
+                throw ex;
             }
-
-
-
         }
 
         public void Withdrw(int acNo, int Amount)
         {
-            var account = accounts.FirstOrDefault(a => a.AccountNumber == acNo);
-            if (account != null)
+            try
             {
-                if(account.Balance < Amount)
+                var account = accounts.FirstOrDefault(a => a.AccountNumber == acNo);
+                if (account != null)
                 {
-                    MessageBox.Show(messageBoxText: $"Insufficient balance",
-                   caption: "Warning",
-                   button: MessageBoxButton.OK,
-                   icon: MessageBoxImage.Warning);
-                    return;
+                    if (account.Balance < Amount)
+                    {
+                        throw new AccountException("Insufficient balance");
+                        
+                    }
+                    account.Balance = account.Balance - Amount;
+                    account.LastTransactionDate = DateTime.Now;
+                    account.TransactionCount = account.TransactionCount + 1;               
+
                 }
-                account.Balance = account.Balance - Amount;
-                account.LastTransactionDate = DateTime.Now;
-                account.TransactionCount = account.TransactionCount + 1;
-
-                MessageBox.Show(messageBoxText: $"Withdrawed Successfully from account {acNo}",
-                    caption: "Alert",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Information);
-
+                else
+                {
+                    throw new AccountException("Account Not Found , Please input valid account number");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show(messageBoxText: $"Account Not Found , Please input valid account number",
-                    caption: "Warning",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Warning);
-                return;
+                throw ex;
             }
+            
         }
 
         public void CalculateInterestAndUpdateBalance()

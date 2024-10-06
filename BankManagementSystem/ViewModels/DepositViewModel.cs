@@ -10,6 +10,7 @@ using BankManagementSystem.Repos;
 using System.Windows.Input;
 using BankManagementSystem.Commands;
 using System.Windows;
+using BankManagementSystem.Exceptions;
 
 namespace BankManagementSystem.ViewModels
 {
@@ -58,11 +59,34 @@ namespace BankManagementSystem.ViewModels
             {
                 return;
             }
-            _repo.Deposit(AccountNumber , Amount);
+            try
+            {
+                _repo.Deposit(AccountNumber, Amount);
+                MessageBox.Show(messageBoxText: $"Deposited Successfully to account {AccountNumber}",
+                        caption: "Alert",
+                        button: MessageBoxButton.OK,
+                        icon: MessageBoxImage.Information);
+                Logger.log.Info($"Deposited {Amount} rupees Successfully to account {AccountNumber}");
+                this.AccountNumber = 0;
+                this.Amount = 0;
+            }
+            catch(AccountException ae)
+            {
+                MessageBox.Show(messageBoxText: $"{ae.Message}",
+               caption: "Warning",
+               button: MessageBoxButton.OK,
+               icon: MessageBoxImage.Warning);
+
+                Logger.log.Error(ae.Message);
+            }
+            catch (Exception ex)
+            {
+                Logger.log.Error(ex.Message);
+            }
+
+
 
             
-            this.AccountNumber = 0;
-            this.Amount = 0;
         }
 
 
