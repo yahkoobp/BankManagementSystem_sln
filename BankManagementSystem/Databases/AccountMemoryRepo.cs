@@ -11,18 +11,29 @@ using BankManagementSystem.Repos;
 
 namespace BankManagementSystem.Databases
 {
+    /// <summary>
+    /// Represents a repository for managing accounts in memory.
+    /// </summary>
     public class AccountMemoryRepo : IAccountRepo
     {
+        /// <summary>
+        /// Gets the instance of the AccountMemoryRepo class.
+        /// </summary>
         private static AccountMemoryRepo _instance;
         private ObservableCollection<Account> accounts;
 
+        /// <summary>
+        /// Initializes a new instance of the AccountMemoryRepo class.
+        /// </summary>
         private AccountMemoryRepo()
         {
             accounts = new ObservableCollection<Account>();
             InitializeAccounts();
         
         }
-
+        /// <summary>
+        /// Initializes the accounts collection with default accounts.
+        /// </summary>
         private void InitializeAccounts()
         {
             accounts.Add(new Account
@@ -33,7 +44,7 @@ namespace BankManagementSystem.Databases
                 Type = "savings",
                 Email = "minnu@gmail.com",
                 PhoneNumber = "5236526526",
-                Address = "gdsagdhsgdhsg",
+                Address = "Address",
                 IsActive = true,
                 InterestPercentage = "0",
                 TransactionCount = 0,
@@ -41,20 +52,23 @@ namespace BankManagementSystem.Databases
             });
             accounts.Add(new Account
             {
-                AccountNumber = 3132324,
+                AccountNumber = 12345,
                 Name = "Ashna",
                 Balance = 0,
                 Type = "current",
-                Email = "minnu@gmail.com",
+                Email = "ashna@gmail.com",
                 PhoneNumber = "5236526526",
-                Address = "gdsagdhsgdhsg",
+                Address = "address",
                 IsActive = true,
                 InterestPercentage = "0",
                 TransactionCount = 0,
                 LastTransactionDate = DateTime.Now,
             });
         }
-
+        
+        /// <summary>
+        /// Creates an object for the AccountMemoryRepo class
+        /// </summary>
         public static AccountMemoryRepo Instance
         {
             get
@@ -68,6 +82,11 @@ namespace BankManagementSystem.Databases
         }
 
 
+        /// <summary>
+        /// Creates a new account in the repository.
+        /// </summary>
+        /// <param name="account">The account to create.</param>
+        /// <exception cref="AccountException">Thrown if an error occurs while creating the account.</exception>
         public void Create(Account account)
         {
             try
@@ -85,6 +104,11 @@ namespace BankManagementSystem.Databases
             
         }
 
+        /// <summary>
+        /// Updates an existing account in the repository.
+        /// </summary>
+        /// <param name="account">The account to update.</param>
+        /// <exception cref="AccountException">Thrown if the account does not exist.</exception>
         public void UpdateAccount(Account account)
         {
             try
@@ -106,6 +130,11 @@ namespace BankManagementSystem.Databases
 
         }
 
+        /// <summary>
+        /// Retrieves all accounts from the repository.
+        /// </summary>
+        /// <returns>A collection of all accounts in the repository.</returns>
+        /// <exception cref="AccountException">Thrown if an error occurs while reading accounts.</exception>
         public ObservableCollection<Account> ReadAllAccount()
         {
             try
@@ -123,11 +152,22 @@ namespace BankManagementSystem.Databases
             
         }
 
+        /// <summary>
+        /// Deletes an account from the repository.
+        /// </summary>
+        /// <param name="acNo">The account number of the account to delete.</param>
+        /// <param name="account">The account to delete.</param>
         public void DeleteAccount(int acNo, Account account)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Deposits a specified amount into an account.
+        /// </summary>
+        /// <param name="acNo">The account number of the account to deposit into.</param>
+        /// <param name="Amount">The amount to deposit.</param>
+        /// <exception cref="AccountException">Thrown if the account does not exist</exception>
         public void Deposit(int acNo, int Amount)
         {
             try
@@ -151,6 +191,12 @@ namespace BankManagementSystem.Databases
             }
         }
 
+        /// <summary>
+        /// Withdraws a specified amount from an account.
+        /// </summary>
+        /// <param name="acNo">The account number of the account to withdraw from.</param>
+        /// <param name="Amount">The amount to withdraw.</param>
+        /// <exception cref="AccountException">Thrown if the account does not exist or if the balance is insufficient.</exception>
         public void Withdrw(int acNo, int Amount)
         {
             try

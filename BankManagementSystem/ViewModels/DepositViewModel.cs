@@ -14,47 +14,66 @@ using BankManagementSystem.Exceptions;
 
 namespace BankManagementSystem.ViewModels
 {
+    /// <summary>
+    /// Represents a view model for depositing money into an account.
+    /// </summary>
     public class DepositViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Gets or sets the account number.
+        /// </summary>
         private int _accountNumber;
         public int AccountNumber
         {
             get { return _accountNumber; }
-            set 
+            set
             {
-                _accountNumber = value; 
+                _accountNumber = value;
                 onPropertyChanged(nameof(AccountNumber));
             }
-
         }
 
+        /// <summary>
+        /// Gets or sets the amount to deposit.
+        /// </summary>
         private int _amount;
-
         public int Amount
         {
             get { return _amount; }
-            set 
+            set
             {
                 _amount = value;
                 onPropertyChanged(nameof(Amount));
             }
         }
 
+        /// <summary>
+        /// Gets the accounts repository.
+        /// </summary>
         private IAccountRepo _repo = AccountMemoryRepo.Instance;
 
-        public ICommand DepositCommand {  get;}
-        
+        /// <summary>
+        /// Gets the command for depositing money into an account.
+        /// </summary>
+        public ICommand DepositCommand { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DepositViewModel"/> class.
+        /// </summary>
         public DepositViewModel()
         {
             DepositCommand = new RelayCommand(Deposit);
         }
 
+        /// <summary>
+        /// Deposits money into an account.
+        /// </summary>
         public void Deposit()
         {
             var result = MessageBox.Show(messageBoxText: "Are you sure to Deposit?",
-                   caption: "Confirm",
-                   button: MessageBoxButton.YesNo,
-                   icon: MessageBoxImage.Question);
+                    caption: "Confirm",
+                    button: MessageBoxButton.YesNo,
+                    icon: MessageBoxImage.Question);
             if (result != MessageBoxResult.Yes)
             {
                 return;
@@ -70,12 +89,12 @@ namespace BankManagementSystem.ViewModels
                 this.AccountNumber = 0;
                 this.Amount = 0;
             }
-            catch(AccountException ae)
+            catch (AccountException ae)
             {
                 MessageBox.Show(messageBoxText: $"{ae.Message}",
-               caption: "Warning",
-               button: MessageBoxButton.OK,
-               icon: MessageBoxImage.Warning);
+                   caption: "Warning",
+                   button: MessageBoxButton.OK,
+                   icon: MessageBoxImage.Warning);
 
                 Logger.log.Error(ae.Message);
             }
@@ -83,15 +102,6 @@ namespace BankManagementSystem.ViewModels
             {
                 Logger.log.Error(ex.Message);
             }
-
-
-
-            
         }
-
-
-
-
-
     }
 }

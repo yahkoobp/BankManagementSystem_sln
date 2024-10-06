@@ -15,7 +15,10 @@ using BankManagementSystem.Repos;
 namespace BankManagementSystem.ViewModels
 {
     public delegate void DWidnowClose();
-   
+
+    // <summary>
+    /// Represents a view model for managing accounts.
+    /// </summary>
     public class AccountViewModel : ViewModelBase
     {
 
@@ -24,6 +27,9 @@ namespace BankManagementSystem.ViewModels
         public DWidnowClose NewWindowClose;
         public DWidnowClose EditWindowClose;
 
+        /// <summary>
+        /// Gets or sets the new account.
+        /// </summary>
         public Account NewAccount
         {
             get { return _newAccount; }
@@ -35,6 +41,9 @@ namespace BankManagementSystem.ViewModels
         }
 
         private Account _selectedAccount = null;
+        /// <summary>
+        /// Gets or sets the selected account.
+        /// </summary>
         public Account SelectedAccount
         {
             get => _selectedAccount;
@@ -44,10 +53,16 @@ namespace BankManagementSystem.ViewModels
             }
         }
 
-        
 
 
+        /// <summary>
+        /// Gets the accounts repository.
+        /// </summary>
         private IAccountRepo _repo = AccountMemoryRepo.Instance;
+
+        // <summary>
+        /// Gets the collection of accounts.
+        /// </summary>
         public ObservableCollection<Account> Accounts
         {
             get
@@ -65,9 +80,19 @@ namespace BankManagementSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the command for creating a new account.
+        /// </summary>
         public ICommand CreateCommand { get; }
+
+        /// <summary>
+        /// Gets the command for updating an existing account.
+        /// </summary>
         public ICommand UpdateCommand { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountViewModel"/> class.
+        /// </summary>
         public AccountViewModel()
         {
             this.NewAccount = new Account
@@ -90,6 +115,10 @@ namespace BankManagementSystem.ViewModels
             UpdateCommand = new RelayCommand(Update);
            
         }
+
+        /// <summary>
+        /// Creates a new account.
+        /// </summary>
 
         public void Create()
         {
@@ -135,7 +164,9 @@ namespace BankManagementSystem.ViewModels
                 NewWindowClose();
             }
         }
-
+        /// <summary>
+        /// Updates an existing account.
+        /// </summary>
         public void Update()
         {
             if (this.SelectedAccount == null)
