@@ -44,7 +44,7 @@ namespace BankManagementSystem
         {
             if (grdAccounts.SelectedIndex == -1)
             {
-                var result = MessageBox.Show(messageBoxText: "Please select iternary to edit",
+                var result = MessageBox.Show(messageBoxText: "Please select an account to edit",
                     caption: "Alert",
                     button: MessageBoxButton.OK,
                     icon: MessageBoxImage.Information);

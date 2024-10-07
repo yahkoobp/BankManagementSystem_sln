@@ -15,48 +15,48 @@
         <TextBlock Grid.Row="0" TextAlignment="center" Text="Edit Account"/>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Account Number"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.AccountNumber}" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Account Number" VerticalAlignment="Center"/>
+                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.AccountNumber}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Name"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Name}" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Name" VerticalAlignment="Center"/>
+                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.Name}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Balance" />
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Balance}" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Balance" VerticalAlignment="Center"/>
+                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.Balance}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Type"/>
-                <RadioButton Content="current" Margin="100 0 0 0" />
-                <RadioButton Content="savings" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Type" VerticalAlignment="Center"/>
+                <RadioButton Content="current" Margin="100 0 0 0" IsEnabled="False" />
+                <RadioButton Content="savings" Margin="10 0 0 0" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Email"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Email}" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Email" VerticalAlignment="Center"/>
+                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.Email}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Phone"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Email}" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Phone" VerticalAlignment="Center"/>
+                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.Email}" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Address"/>
-                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding SelectedAccount.Address}"/>
+                <TextBlock Width="150" Text="Address" VerticalAlignment="Center"/>
+                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.Address}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="IsActive"/>
+                <TextBlock Width="150" Text="IsActive" VerticalAlignment="Center"/>
                 <CheckBox Content="" Margin="100 0 0 0" IsEnabled="false"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Interest Percentage"/>
+                <TextBlock Width="150" Text="Interest Percentage" VerticalAlignment="Center"/>
                 <ComboBox Margin="100 0 0 0" IsEnabled="false">
                     <ComboBoxItem Content="5%"/>
                     <ComboBoxItem Content="10%"/>
@@ -65,13 +65,13 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Transaction Count"/>
-                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0" Text="{Binding SelectedAccount.TransactionCount}"/>
+                <TextBlock Width="150" Text="Transaction Count" VerticalAlignment="Center"/>
+                <TextBox Style="{StaticResource MyTextBoxStyle}" IsEnabled="False" Text="{Binding SelectedAccount.TransactionCount}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Last Transaction Date"/>
-                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0" Text="{Binding SelectedAccount.LastTransactionDate}"/>
+                <TextBlock Width="150" Text="Last Transaction Date" VerticalAlignment="Center"/>
+                <TextBox Style="{StaticResource MyTextBoxStyle}" IsEnabled="False" Text="{Binding SelectedAccount.LastTransactionDate}"/>
             </StackPanel>
         </StackPanel>
 

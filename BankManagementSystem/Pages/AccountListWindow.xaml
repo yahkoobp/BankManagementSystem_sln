@@ -46,8 +46,12 @@
 Margin="10 10 0 0" HorizontalAlignment="Right"
 Background="#9e0344" Foreground="yellow" FontWeight="bold"
 Click="btnView_Click"/>
-            
-        <Button  Content="Update Account" Width="200" Height="30"
+
+            <Button x:Name="btnDelete" Content="Mark As Delete" Width="200" Height="30"
+Margin="10 10 0 0" HorizontalAlignment="Right"
+Background="#9e0344" Foreground="yellow" FontWeight="bold" Command="{Binding DeleteCommand}"/>
+
+            <Button  Content="Update Account" Width="200" Height="30"
         Margin="30 10 0 0" HorizontalAlignment="Right"
         Background="#9e0344" Foreground="yellow" FontWeight="bold"
         Click="Button_Click_1"/>

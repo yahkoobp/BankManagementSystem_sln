@@ -23,14 +23,14 @@ namespace BankManagementSystem.Repos
         /// Updates an existing account.
         /// </summary>
         /// <param name="account">The account to update.</param>
-        void UpdateAccount(Account account);
+        void Update(Account account);
 
         /// <summary>
         /// Deletes an account.
         /// </summary>
         /// <param name="acNo">The account number of the account to delete.</param>
         /// <param name="account">The account to delete.</param>
-        void DeleteAccount(int acNo, Account account);
+        void Delete(Account account);
 
         /// <summary>
         /// Deposits money into an account.
@@ -55,6 +55,6 @@ namespace BankManagementSystem.Repos
         /// Retrieves all accounts.
         /// </summary>
         /// <returns>A collection of all accounts.</returns>
-        ObservableCollection<Account> ReadAllAccount();
+        ObservableCollection<Account> ReadAll();
     }
 }

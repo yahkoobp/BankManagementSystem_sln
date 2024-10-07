@@ -60,6 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BooleanToVisibilityConverter.cs" />
+    <Compile Include="ComboBoxItemToStringConverter.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Databases\AccountMemoryRepo.cs" />
     <Compile Include="Exceptions\AccountException.cs" />

@@ -21,7 +21,7 @@ namespace BankManagementAppTests
         public void Test_ReadAllAccounts()
         {
             _repo = AccountMemoryRepo.Instance;
-            var accounts = _repo.ReadAllAccount();
+            var accounts = _repo.ReadAll();
 
             Assert.AreEqual(2, accounts.Count);
             Assert.IsTrue(accounts.Any(a => a.AccountNumber == 1234));
@@ -47,7 +47,7 @@ namespace BankManagementAppTests
             };
             _repo.Create(account);
 
-            Assert.IsTrue(_repo.ReadAllAccount().Any(ac => ac.AccountNumber == 49));
+            Assert.IsTrue(_repo.ReadAll().Any(ac => ac.AccountNumber == 49));
         }
 
         [TestMethod]
@@ -69,8 +69,8 @@ namespace BankManagementAppTests
             };
 
             account.Address = "New Address";
-            _repo.UpdateAccount(account);
-            Assert.AreEqual("New Address", _repo.ReadAllAccount().First(a => a.AccountNumber == 1234).Address);
+            _repo.Update(account);
+            Assert.AreEqual("New Address", _repo.ReadAll().First(a => a.AccountNumber == 1234).Address);
         }
         [TestMethod]
         public void Test_Deposit()
@@ -91,7 +91,7 @@ namespace BankManagementAppTests
             };
 
             _repo.Deposit(account.AccountNumber, 1000);
-            Assert.AreEqual(1000 , _repo.ReadAllAccount().First(ac => ac.AccountNumber == account.AccountNumber).Balance);
+            Assert.AreEqual(1000 , _repo.ReadAll().First(ac => ac.AccountNumber == account.AccountNumber).Balance);
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace BankManagementAppTests
 
             _repo.Deposit(account.AccountNumber, 1000);
             _repo.Withdrw(account.AccountNumber, 700);
-            Assert.AreEqual(300, _repo.ReadAllAccount().First(ac => ac.AccountNumber == account.AccountNumber).Balance);
+            Assert.AreEqual(300, _repo.ReadAll().First(ac => ac.AccountNumber == account.AccountNumber).Balance);
 
         }
 

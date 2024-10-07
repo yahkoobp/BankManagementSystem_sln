@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:BankManagementSystem"
              StartupUri="/Pages/LoginPageWindow.xaml">
     <Application.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:ComboBoxItemToStringConverter x:Key="ComboBoxItemToStringConverter"/>
+
+        <Style x:Key="MyTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Margin" Value="100 0 0 0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="4 4 4 4"/>
+            <Setter Property="BorderBrush" Value="gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
 
     </Application.Resources>
 </Application>

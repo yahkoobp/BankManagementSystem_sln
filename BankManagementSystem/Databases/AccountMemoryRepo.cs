@@ -109,7 +109,7 @@ namespace BankManagementSystem.Databases
         /// </summary>
         /// <param name="account">The account to update.</param>
         /// <exception cref="AccountException">Thrown if the account does not exist.</exception>
-        public void UpdateAccount(Account account)
+        public void Update(Account account)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace BankManagementSystem.Databases
         /// </summary>
         /// <returns>A collection of all accounts in the repository.</returns>
         /// <exception cref="AccountException">Thrown if an error occurs while reading accounts.</exception>
-        public ObservableCollection<Account> ReadAllAccount()
+        public ObservableCollection<Account> ReadAll()
         {
             try
             {
@@ -157,9 +157,24 @@ namespace BankManagementSystem.Databases
         /// </summary>
         /// <param name="acNo">The account number of the account to delete.</param>
         /// <param name="account">The account to delete.</param>
-        public void DeleteAccount(int acNo, Account account)
+        public void Delete(Account account)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var existingAccount = accounts.FirstOrDefault(a => a.AccountNumber == account.AccountNumber);
+                if (existingAccount != null)
+                {
+                    existingAccount.IsActive = false;
+                }
+                else
+                {
+                    throw new AccountException("Account doesn't exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>

@@ -16,13 +16,13 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Account Number" VerticalAlignment="Center" Width="200" FontWeight="bold"
                            FontSize="14" />
-                    <TextBox Width="300" Height="30" Margin="10 0 0 0" Text="{Binding AccountNumber}"/>
+                    <TextBox Style="{StaticResource MyTextBoxStyle}" Text="{Binding AccountNumber}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                     <TextBlock Text="Amount" VerticalAlignment="Center" Width="200" FontWeight="bold"
            FontSize="14"/>
-                    <TextBox Width="300" Height="30" Margin="10 10 0 0" Text="{Binding Amount}"/>
+                    <TextBox Style="{StaticResource MyTextBoxStyle}" Text="{Binding Amount}"/>
                 </StackPanel>
 
                 <Button Content="Deposit" Background="Green" Foreground="white" FontWeight="bold"
