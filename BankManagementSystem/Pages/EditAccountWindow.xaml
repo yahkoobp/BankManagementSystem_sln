@@ -7,13 +7,17 @@
         mc:Ignorable="d"
         Title="EditAccountWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid MaxWidth="1200" Margin="0 10 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="651*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" TextAlignment="center" Text="Edit Account"/>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
+        <TextBlock Grid.Row="0" TextAlignment="center" Text="Edit Account" Grid.ColumnSpan="2" Margin="0,0,0,328" Grid.RowSpan="2"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Account Number" VerticalAlignment="Center"/>
                 <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding SelectedAccount.AccountNumber}" IsEnabled="false"/>
@@ -30,9 +34,9 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Type" VerticalAlignment="Center"/>
-                <RadioButton Content="current" Margin="100 0 0 0" IsEnabled="False" />
-                <RadioButton Content="savings" Margin="10 0 0 0" IsEnabled="false"/>
+                <TextBlock Width="150" Text="Type" VerticalAlignment="Center" />
+                <RadioButton Content="current" Margin="100 0 0 0" IsChecked="{Binding SelectedAccount.Type, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=current}"/>
+                <RadioButton Content="savings" Margin="10 0 0 0" IsChecked="{Binding SelectedAccount.Type, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=savings}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
@@ -52,12 +56,12 @@
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="IsActive" VerticalAlignment="Center"/>
-                <CheckBox Content="" Margin="100 0 0 0" IsEnabled="false"/>
+                <CheckBox Content="" Margin="100 0 0 0" IsEnabled="false" IsChecked="{Binding SelectedAccount.IsActive}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Interest Percentage" VerticalAlignment="Center"/>
-                <ComboBox Margin="100 0 0 0" IsEnabled="false">
+                <ComboBox Margin="100 0 0 0" IsEnabled="false" Text="{Binding NewAccount.InterestPercentage}">
                     <ComboBoxItem Content="5%"/>
                     <ComboBoxItem Content="10%"/>
                     <ComboBoxItem Content="15%"/>
@@ -75,10 +79,10 @@
             </StackPanel>
         </StackPanel>
 
-        <Button HorizontalAlignment="right" Grid.Row="2" Width="200" Background="Teal" Content="Save" Foreground="White" FontWeight="bold"
+        <Button HorizontalAlignment="Right" Grid.Row="2" Width="200" Background="Teal" Content="Save" Foreground="White" FontWeight="bold"
         Height="50"
         Margin="0 10 20 20"
-                Command="{Binding UpdateCommand}"/>
+                Command="{Binding UpdateCommand}" Grid.Column="1"/>
 
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ namespace BankManagementSystem.Models
         /// <summary>
         /// Gets or sets the account number.
         /// </summary>
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the account holder's name.

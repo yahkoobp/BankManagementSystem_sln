@@ -37,14 +37,14 @@ namespace BankManagementSystem.Repos
         /// </summary>
         /// <param name="acNo">The account number of the account to deposit into.</param>
         /// <param name="Amount">The amount to deposit.</param>
-        void Deposit(int acNo, int Amount);
+        void Deposit(string acNo, int Amount);
 
         /// <summary>
         /// Withdraws money from an account.
         /// </summary>
         /// <param name="acNo">The account number of the account to withdraw from.</param>
         /// <param name="Amount">The amount to withdraw.</param>
-        void Withdrw(int acNo, int Amount);
+        void Withdrw(string acNo, int Amount);
 
         /// <summary>
         /// Calculates the interest and updates the balance for all accounts.

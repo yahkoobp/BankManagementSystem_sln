@@ -17,52 +17,60 @@
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 10 0 0">
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Account Number" VerticalAlignment="Center"/>
-                <TextBox Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.AccountNumber}"/>
+                <TextBox x:Name="txtAcNo" Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.AccountNumber}"/>
+                <TextBlock x:Name="errAc" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Name"/>
-                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Name}"/>
+                <TextBox x:Name="txtName" Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Name}"/>
+                <TextBlock x:Name="errName" Visibility="Hidden" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Balance" />
                 <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Balance}" />
+                
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10" >
                 <TextBlock Width="150" Text="Type"/>
-                <RadioButton Content="current" Margin="100 0 0 0" IsChecked="{Binding NewAccount.Type, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=current}"/>
-                <RadioButton Content="savings" Margin="10 0 0 0" IsChecked="{Binding NewAccount.Type, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=savings}"/>
+                <RadioButton x:Name="rdbCurrent" Content="current" Margin="100 0 0 0" IsChecked="{Binding NewAccount.Type, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=current}" />
+                <RadioButton x:Name="rdbSavings" Content="savings" Margin="10 0 0 0" IsChecked="{Binding NewAccount.Type, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=savings}"/>
+                <TextBlock x:Name="errType" Visibility="Hidden" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Email"/>
-                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Email}"/>
+                <TextBox x:Name="txtEmail" Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Email}"/>
+                <TextBlock x:Name="errEmail" Visibility="Hidden" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Phone"/>
-                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.PhoneNumber}"/>
+                <TextBox  x:Name="txtPhone" Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.PhoneNumber}"/>
+                <TextBlock x:Name="errPhone" Visibility="Hidden" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                <TextBlock Width="150" Text="Address"/>
-                <TextBox  Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Address}"/>
+                <TextBlock  Width="150" Text="Address"/>
+                <TextBox x:Name="txtAddress" Style="{StaticResource MyTextBoxStyle}" Text="{Binding NewAccount.Address}"/>
+                <TextBlock x:Name="errAddress" Visibility="Hidden" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="IsActive"/>
-                <CheckBox Content="" Margin="100 0 0 0" IsChecked="{Binding NewAccount.IsActive}"/>
+                <CheckBox Content="" Margin="100 0 0 0" IsChecked="{Binding NewAccount.IsActive}" IsEnabled="False"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                 <TextBlock Width="150" Text="Interest Percentage"/>
-                <ComboBox Margin="100 0 0 0" SelectedItem ="{Binding NewAccount.InterestPercentage ,Converter={StaticResource ComboBoxItemToStringConverter}}">
+                <ComboBox Margin="100 0 0 0" Text="{Binding NewAccount.InterestPercentage}" x:Name="cmbInterest">
                     <ComboBoxItem Content="5"/>
                     <ComboBoxItem Content="10"/>
                     <ComboBoxItem Content="15"/>
                 </ComboBox>
+                <TextBlock x:Name="errInterest" Visibility="Hidden" Foreground="red" Margin="20 0 0 0" FontWeight="bold" FontSize="10" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10 10 10 10">

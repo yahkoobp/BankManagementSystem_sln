@@ -15,6 +15,7 @@ using BankManagementSystem.Repos;
 namespace BankManagementSystem.ViewModels
 {
     public delegate void DWidnowClose();
+    public delegate bool DFormValid();
 
     // <summary>
     /// Represents a view model for managing accounts.
@@ -26,6 +27,7 @@ namespace BankManagementSystem.ViewModels
        
         public DWidnowClose NewWindowClose;
         public DWidnowClose EditWindowClose;
+        public DFormValid IsFormValid;
 
         /// <summary>
         /// Gets or sets the new account.
@@ -98,28 +100,39 @@ namespace BankManagementSystem.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountViewModel"/> class.
         /// </summary>
+       
+        public ICommand ResetCommand { get; }
+
+        public ICommand ValidateCommand { get; }
+       
         public AccountViewModel()
+        {
+            Reset();      
+            CreateCommand = new RelayCommand(Create);
+            UpdateCommand = new RelayCommand(Update);
+            DeleteCommand = new RelayCommand(Delete);
+            ResetCommand = new RelayCommand(Reset);
+           
+        }
+
+        public void Reset()
         {
             this.NewAccount = new Account
             {
-                AccountNumber = 00000,
+                AccountNumber = "00000",
                 Name = "",
                 Balance = 0,
                 Type = "",
                 Email = "",
                 PhoneNumber = "",
                 Address = "",
-                IsActive = false,
+                IsActive = true,
                 InterestPercentage = "0",
                 TransactionCount = 0,
                 LastTransactionDate = DateTime.Now,
 
 
             };
-            CreateCommand = new RelayCommand(Create);
-            UpdateCommand = new RelayCommand(Update);
-            DeleteCommand = new RelayCommand(Delete);
-           
         }
 
         /// <summary>
@@ -142,23 +155,35 @@ namespace BankManagementSystem.ViewModels
                 TransactionCount = NewAccount.TransactionCount,
                 LastTransactionDate = NewAccount.LastTransactionDate,
             };
-            var result = MessageBox.Show(messageBoxText: "Are you sure to create?",
-                    caption: "Confirm",
-                    button: MessageBoxButton.YesNo,
-                    icon: MessageBoxImage.Question);
-            if (result != MessageBoxResult.Yes)
-            {
-                return;
-            }
             try
             {
-                _repo.Create(newAccount);
-                result = MessageBox.Show(messageBoxText: "Created Successfully",
-                   caption: "Alert",
-                   button: MessageBoxButton.OK,
-                   icon: MessageBoxImage.Information);
-                Logger.log.Info($"An account with acoount number {newAccount.AccountNumber} has been created successfully");
-                this.NewAccount = new Account { AccountNumber = 0, Name = "", Balance = 0, Type = "", Email = "", PhoneNumber = "", Address = "", IsActive = false, InterestPercentage = "0", TransactionCount = 0, LastTransactionDate = DateTime.Now };
+                if (IsFormValid != null)
+                {
+                    if (IsFormValid())
+                    {
+                        var result = MessageBox.Show(messageBoxText: "Are you sure to create?",
+                        caption: "Confirm",
+                        button: MessageBoxButton.YesNo,
+                        icon: MessageBoxImage.Question);
+                        if (result != MessageBoxResult.Yes)
+                        {
+                            return;
+                        }
+                        _repo.Create(newAccount);
+                        result = MessageBox.Show(messageBoxText: "Created Successfully",
+                        caption: "Alert",
+                        button: MessageBoxButton.OK,
+                        icon: MessageBoxImage.Information);
+                        Logger.log.Info($"An account with acoount number {newAccount.AccountNumber} has been created successfully");
+                        Reset();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                   
+                }               
+               
             }
             catch(AccountException ae)
             {
@@ -252,7 +277,6 @@ namespace BankManagementSystem.ViewModels
                 Logger.log.Error(ae.Message);
             }
         }
-
 
 
     }

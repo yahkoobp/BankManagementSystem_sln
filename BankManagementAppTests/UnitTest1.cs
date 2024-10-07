@@ -24,8 +24,8 @@ namespace BankManagementAppTests
             var accounts = _repo.ReadAll();
 
             Assert.AreEqual(2, accounts.Count);
-            Assert.IsTrue(accounts.Any(a => a.AccountNumber == 1234));
-            Assert.IsTrue(accounts.Any(a => a.AccountNumber == 12345));
+            Assert.IsTrue(accounts.Any(a => a.AccountNumber.CompareTo("1234") == 0));
+            Assert.IsTrue(accounts.Any(a => a.AccountNumber.CompareTo("12345") == 0));
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace BankManagementAppTests
         {
             var account = new Account()
             {
-                AccountNumber = 49,
+                AccountNumber = "49",
                 Name = "Rishwin",
                 Balance = 0,
                 Type = "current",
@@ -47,7 +47,7 @@ namespace BankManagementAppTests
             };
             _repo.Create(account);
 
-            Assert.IsTrue(_repo.ReadAll().Any(ac => ac.AccountNumber == 49));
+            Assert.IsTrue(_repo.ReadAll().Any(ac => ac.AccountNumber.CompareTo("49") == 0));
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace BankManagementAppTests
         {
             Account account = new Account
             {
-                AccountNumber = 1234,
+                AccountNumber = "1234",
                 Name = "Minnu",
                 Balance = 0,
                 Type = "savings",
@@ -70,14 +70,14 @@ namespace BankManagementAppTests
 
             account.Address = "New Address";
             _repo.Update(account);
-            Assert.AreEqual("New Address", _repo.ReadAll().First(a => a.AccountNumber == 1234).Address);
+            Assert.AreEqual("New Address", _repo.ReadAll().First(a => a.AccountNumber.CompareTo("1234") == 0).Address);
         }
         [TestMethod]
         public void Test_Deposit()
         {
             Account account = new Account
             {
-                AccountNumber = 1234,
+                AccountNumber = "1234",
                 Name = "Minnu",
                 Balance = 0,
                 Type = "savings",
@@ -99,7 +99,7 @@ namespace BankManagementAppTests
         {
             var account = new Account()
             {
-                AccountNumber = 12345,
+                AccountNumber = "12345",
                 Name = "Ashna",
                 Balance = 0,
                 Type = "current",

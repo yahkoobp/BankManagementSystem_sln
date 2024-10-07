@@ -20,8 +20,8 @@ namespace BankManagementSystem.ViewModels
         /// <summary>
         /// Gets or sets the account number.
         /// </summary>
-        private int _accountNumber;
-        public int AccountNumber
+        private string _accountNumber;
+        public string AccountNumber
         {
             get { return _accountNumber; }
             set
@@ -85,7 +85,7 @@ namespace BankManagementSystem.ViewModels
                         button: MessageBoxButton.OK,
                         icon: MessageBoxImage.Information);
                 Logger.log.Info($"Withdrawed {Amount} rupees Successfully from account {AccountNumber}");
-                this.AccountNumber = 0;
+                this.AccountNumber = "0";
                 this.Amount = 0;
             }
             catch (AccountException ae)
