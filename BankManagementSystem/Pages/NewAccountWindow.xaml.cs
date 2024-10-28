@@ -23,7 +23,7 @@ namespace BankManagementSystem.Pages
         {
             InitializeComponent();
             this.DataContext = FormConfig.accountViewModel;
-            FormConfig.accountViewModel.IsFormValid = IsFormValid;
+            //FormConfig.accountViewModel.IsFormValid = IsFormValid;
         }
 
         public bool IsFormValid()

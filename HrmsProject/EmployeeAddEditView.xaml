@@ -1,0 +1,27 @@
+﻿<Window x:Class="HrmsProject.EmployeeAddEditView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HrmsProject"
+        mc:Ignorable="d"
+        Title="EmployeeAddEditView" Height="450" Width="800">
+    <StackPanel>
+        <TextBox Text="{Binding Employee.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox ItemsSource="{Binding AgeOptions}" SelectedItem="{Binding Employee.Age}"/>
+        <TextBox Text="{Binding Employee.Salary}"/>
+
+        <!-- Job Title Radio Buttons -->
+        <StackPanel Orientation="Horizontal">
+            <RadioButton Content="Programmer" IsChecked="{Binding Path=Employee.JobTitle, Converter={StaticResource JobTitleConverter}, ConverterParameter='Programmer'}"/>
+            <RadioButton Content="Tester" IsChecked="{Binding Path=Employee.JobTitle, Converter={StaticResource JobTitleConverter}, ConverterParameter='Tester'}"/>
+            <RadioButton Content="Analyst" IsChecked="{Binding Path=Employee.JobTitle, Converter={StaticResource JobTitleConverter}, ConverterParameter='Analyst'}"/>
+            <RadioButton Content="Designer" IsChecked="{Binding Path=Employee.JobTitle, Converter={StaticResource JobTitleConverter}, ConverterParameter='Designer'}"/>
+        </StackPanel>
+
+        <!-- Active Status CheckBox -->
+        <CheckBox Content="Active" IsChecked="{Binding Employee.ActiveStatus}"/>
+
+        <Button Content="Save" Command="{Binding SaveCommand}"/>
+    </StackPanel>
+</Window>

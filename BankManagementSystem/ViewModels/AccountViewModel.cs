@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using BankManagementSystem.Exceptions;
 using BankManagementSystem.Models;
 using BankManagementSystem.Repos;
 
+
 namespace BankManagementSystem.ViewModels
 {
     public delegate void DWidnowClose();
@@ -20,7 +22,7 @@ namespace BankManagementSystem.ViewModels
     // <summary>
     /// Represents a view model for managing accounts.
     /// </summary>
-    public class AccountViewModel : ViewModelBase
+    public class AccountViewModel : ViewModelBase ,IDataErrorInfo
     {
 
         private Account _newAccount = null;
@@ -104,22 +106,29 @@ namespace BankManagementSystem.ViewModels
         public ICommand ResetCommand { get; }
 
         public ICommand ValidateCommand { get; }
+
        
+
         public AccountViewModel()
         {
-            Reset();      
-            CreateCommand = new RelayCommand(Create);
+            Reset();
+            CreateCommand = new RelayCommand(Create, () => CanCreate());
             UpdateCommand = new RelayCommand(Update);
             DeleteCommand = new RelayCommand(Delete);
             ResetCommand = new RelayCommand(Reset);
            
         }
 
+        public bool CanCreate()
+        {
+            return (Balance > 0) && (Email.Length != 0);
+        }
+
         public void Reset()
         {
             this.NewAccount = new Account
             {
-                AccountNumber = "00000",
+                AccountNumber = "0",
                 Name = "",
                 Balance = 0,
                 Type = "",
@@ -156,33 +165,22 @@ namespace BankManagementSystem.ViewModels
                 LastTransactionDate = NewAccount.LastTransactionDate,
             };
             try
-            {
-                if (IsFormValid != null)
+            {   
+                var result = MessageBox.Show(messageBoxText: "Are you sure to create?",
+                caption: "Confirm",
+                button: MessageBoxButton.YesNo,
+                icon: MessageBoxImage.Question);
+                if (result != MessageBoxResult.Yes)
                 {
-                    if (IsFormValid())
-                    {
-                        var result = MessageBox.Show(messageBoxText: "Are you sure to create?",
-                        caption: "Confirm",
-                        button: MessageBoxButton.YesNo,
-                        icon: MessageBoxImage.Question);
-                        if (result != MessageBoxResult.Yes)
-                        {
-                            return;
-                        }
-                        _repo.Create(newAccount);
-                        result = MessageBox.Show(messageBoxText: "Created Successfully",
-                        caption: "Alert",
-                        button: MessageBoxButton.OK,
-                        icon: MessageBoxImage.Information);
-                        Logger.log.Info($"An account with acoount number {newAccount.AccountNumber} has been created successfully");
-                        Reset();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                   
-                }               
+                    return;
+                }
+                _repo.Create(newAccount);
+                result = MessageBox.Show(messageBoxText: "Created Successfully",
+                caption: "Alert",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Information);
+                Logger.log.Info($"An account with acoount number {newAccount.AccountNumber} has been created successfully");
+                Reset();               
                
             }
             catch(AccountException ae)
@@ -275,6 +273,67 @@ namespace BankManagementSystem.ViewModels
             catch (AccountException ae)
             {
                 Logger.log.Error(ae.Message);
+            }
+        }
+
+        public int CRUD { get; set; } = 1;
+        public string Error => throw new NotImplementedException();
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string validationMessage = null;
+                Account opAccount = CRUD == 1 ? NewAccount : SelectedAccount;
+                switch (columnName)
+                {              
+                    case nameof(Balance):
+                        if(this.NewAccount.Balance < 0)
+                        {
+                            validationMessage = "Balance should not be negetive";
+                        }
+                        break;
+                
+                    case nameof(Email):
+                        if (this.NewAccount.Email.Length == 0)
+                        {
+                            validationMessage = "Please enter email";
+                        }
+                        break;
+                }
+
+                return validationMessage;
+            }
+        }
+
+        
+        public decimal Balance
+        {
+            get
+            {
+                Account opAccount = CRUD == 1 ? NewAccount : SelectedAccount;
+                return opAccount.Balance;
+            }
+            set
+            {
+                Account opAccount = CRUD == 1 ? NewAccount : SelectedAccount;
+                opAccount.Balance = value;
+                onPropertyChanged(nameof(Balance));
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                Account opAccount = CRUD == 1 ? NewAccount : SelectedAccount;
+                return opAccount.Email;
+            }
+            set
+            {
+                Account opAccount = CRUD == 1 ? NewAccount : SelectedAccount;
+                opAccount.Email = value;
+                onPropertyChanged(nameof(Email));
             }
         }
 
