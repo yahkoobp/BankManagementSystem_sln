@@ -117,3 +117,86 @@ public class PowerPointMerger
     }
 }
 
+
+
+
+
+
+
+
+
+
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class PowerPointMerger
+{
+    public void MergePowerPointFiles(List<string> pptPaths, string outputPath)
+    {
+        using (PresentationDocument mergedPresentation = PresentationDocument.Create(outputPath, PresentationDocumentType.Presentation))
+        {
+            // Create a new PresentationPart for the merged presentation
+            PresentationPart mergedPresentationPart = mergedPresentation.AddPresentationPart();
+            mergedPresentationPart.Presentation = new Presentation();
+
+            // A dictionary to track already copied SlideMasterParts and SlideLayoutParts
+            Dictionary<string, SlideMasterPart> slideMasterParts = new Dictionary<string, SlideMasterPart>();
+            Dictionary<string, SlideLayoutPart> slideLayoutParts = new Dictionary<string, SlideLayoutPart>();
+
+            foreach (string pptPath in pptPaths)
+            {
+                using (PresentationDocument sourcePresentation = PresentationDocument.Open(pptPath, false))
+                {
+                    PresentationPart sourcePresentationPart = sourcePresentation.PresentationPart;
+
+                    // Copy SlideMasters to merged presentation
+                    foreach (SlideMasterPart masterPart in sourcePresentationPart.SlideMasterParts)
+                    {
+                        if (!slideMasterParts.ContainsKey(masterPart.RelationshipId))
+                        {
+                            // Add the SlideMasterPart to merged presentation and track it
+                            SlideMasterPart newMasterPart = mergedPresentationPart.AddPart(masterPart);
+                            slideMasterParts[masterPart.RelationshipId] = newMasterPart;
+                        }
+                    }
+
+                    // Copy SlideLayouts to merged presentation
+                    foreach (SlideLayoutPart layoutPart in sourcePresentationPart.SlideLayoutParts)
+                    {
+                        if (!slideLayoutParts.ContainsKey(layoutPart.RelationshipId))
+                        {
+                            // Add the SlideLayoutPart to merged presentation and track it
+                            SlideLayoutPart newLayoutPart = mergedPresentationPart.AddPart(layoutPart);
+                            slideLayoutParts[layoutPart.RelationshipId] = newLayoutPart;
+                        }
+                    }
+
+                    // Add slides from source presentation
+                    foreach (SlideId slideId in sourcePresentationPart.Presentation.SlideIdList)
+                    {
+                        // Get the SlidePart of the current slide
+                        SlidePart sourceSlidePart = (SlidePart)sourcePresentationPart.GetPartById(slideId.RelationshipId);
+
+                        // Create a new SlidePart in the merged presentation
+                        SlidePart newSlidePart = mergedPresentationPart.AddPart(sourceSlidePart);
+
+                        // Add the slide to the merged presentation's SlideIdList with a new ID
+                        SlideId newSlideId = mergedPresentationPart.Presentation.SlideIdList.AppendChild(new SlideId());
+                        newSlideId.Id = (UInt32Value)(mergedPresentationPart.Presentation.SlideIdList.Count() + 256U);
+
+                        // Ensure the correct RelationshipId is set for the new slide
+                        newSlideId.RelationshipId = mergedPresentationPart.GetIdOfPart(newSlidePart);
+                    }
+                }
+            }
+
+            // Save the merged presentation
+            mergedPresentationPart.Presentation.Save();
+        }
+    }
+}
+
