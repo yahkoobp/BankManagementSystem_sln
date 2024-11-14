@@ -44,3 +44,76 @@ public void MergePowerPointFiles(List<string> pptPaths, string outputPath)
         mergedPresentationPart.Presentation.Save();
     }
 }
+
+
+
+
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml;
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+public class PowerPointMerger
+{
+    public void MergePowerPointFiles(List<string> pptPaths, string outputPath)
+    {
+        using (PresentationDocument mergedPresentation = PresentationDocument.Create(outputPath, PresentationDocumentType.Presentation))
+        {
+            // Create a new PresentationPart for the merged presentation
+            PresentationPart mergedPresentationPart = mergedPresentation.AddPresentationPart();
+            mergedPresentationPart.Presentation = new Presentation();
+
+            // Track and add slide masters and themes to merged presentation
+            Dictionary<string, SlideMasterPart> slideMasterParts = new Dictionary<string, SlideMasterPart>();
+            Dictionary<string, SlideLayoutPart> slideLayoutParts = new Dictionary<string, SlideLayoutPart>();
+
+            foreach (string pptPath in pptPaths)
+            {
+                using (PresentationDocument sourcePresentation = PresentationDocument.Open(pptPath, false))
+                {
+                    PresentationPart sourcePresentationPart = sourcePresentation.PresentationPart;
+
+                    // Copy SlideMasters and Themes to ensure consistency across slides
+                    foreach (SlideMasterPart masterPart in sourcePresentationPart.SlideMasterParts)
+                    {
+                        if (!slideMasterParts.ContainsKey(masterPart.RelationshipId))
+                        {
+                            // Add master slide part to merged presentation
+                            SlideMasterPart newMasterPart = mergedPresentationPart.AddPart(masterPart);
+                            slideMasterParts[masterPart.RelationshipId] = newMasterPart;
+                        }
+                    }
+
+                    // Copy SlideLayouts and ensure they are added to the merged presentation
+                    foreach (SlideLayoutPart layoutPart in sourcePresentationPart.SlideLayoutParts)
+                    {
+                        if (!slideLayoutParts.ContainsKey(layoutPart.RelationshipId))
+                        {
+                            // Add slide layout part to merged presentation
+                            SlideLayoutPart newLayoutPart = mergedPresentationPart.AddPart(layoutPart);
+                            slideLayoutParts[layoutPart.RelationshipId] = newLayoutPart;
+                        }
+                    }
+
+                    // Add slides from source presentation
+                    foreach (SlideId slideId in sourcePresentationPart.Presentation.SlideIdList)
+                    {
+                        SlidePart sourceSlidePart = (SlidePart)sourcePresentationPart.GetPartById(slideId.RelationshipId);
+                        SlidePart newSlidePart = mergedPresentationPart.AddPart(sourceSlidePart);
+
+                        // Add the slide to the merged presentation's slide list with new ID
+                        SlideId newSlideId = mergedPresentationPart.Presentation.SlideIdList.AppendChild(new SlideId());
+                        newSlideId.Id = (UInt32Value)(mergedPresentationPart.Presentation.SlideIdList.Count() + 256U);
+                        newSlideId.RelationshipId = mergedPresentationPart.GetIdOfPart(newSlidePart);
+                    }
+                }
+            }
+
+            // Save the merged presentation
+            mergedPresentationPart.Presentation.Save();
+        }
+    }
+}
+
